@@ -3,7 +3,7 @@ const db = require("../db");
 const router = express.Router();
 const { ref, uploadBytes } = require("firebase/storage");
 const storage = require("../config");
-const { result } = require("lodash");
+
 
 router.get("/all", (req, res) => {
   const sql = "SELECT * FROM `pets` LIMIT 10";
