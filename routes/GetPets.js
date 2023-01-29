@@ -21,7 +21,7 @@ router.put("/update", (req, res) => {
   // console.log(req.body);
   let pet = req.body;
   const sql = `UPDATE pets SET name = '${pet.name}',adopted ='${pet.adopted}', hypoallergenic = '${pet.hypoallergenic}',
-  type = '${pet.type}', height = ${pet.height}, weight = ${pet.weight}, color = '${pet.color}', breed = '${pet.breed}', bio = "${pet.bio}"  WHERE id = '${pet.id}'`;
+  type = '${pet.type}', height = ${pet.height}, weight = ${pet.weight}, color = '${pet.color}', breed = '${pet.breed}', bio = "${pet.bio}", owner = '${pet.owner}' WHERE id = '${pet.id}'`;
   db.query(sql, (err, result) => {
     if (err) {
       console.log(err);
@@ -109,13 +109,12 @@ router.get("/getSavedPets/:id", (req, res) => {
 });
 
 router.get("/checkSaved/:userId/:petId",(req, res)=>{
-  console.log(req.params)
+  console.log('checking')
   const sql = `SELECT * FROM savedPets LEFT JOIN pets ON savedPets.petId = pets.id WHERE savedPets.userId = '${req.params.userId}' AND savedPets.petId = '${req.params.petId}'`;
    db.query(sql, (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
       res.send(result);
     }
   });
